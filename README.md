@@ -18,5 +18,6 @@ scp index.php gymoktem@gymoktem.myjino.ru:/home/users/g/gymoktem/domains/oktemse
 - [ ] android app with notification and connection to Database
 - [ ] android app has the orders page with auto update
 - [ ] web client app with auto update status
+- [ ] Возможность изменения у водителя детали заказа (заказали два бутыля а по факту я отдал один бутыль)
 
 > deadline: August 1, 2025
