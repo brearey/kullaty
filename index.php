@@ -1,6 +1,9 @@
 <?php
     require_once 'db_connect.php';
     require_once 'classes/Cookie.php';
+
+    // Get price
+    $price  = R::findOne( 'system_info', ' name = ? ', [ 'price' ] );
 ?>
 
 <!DOCTYPE html>
@@ -127,7 +130,7 @@
         <table class="ml-auto mr-auto">
             <tr class="bottleCount text-center">
                 <td class="px-4">
-                    <img src="images/bottle.jpg" alt="100 руб/шт." height="200" title="100 руб/шт.">
+                    <img src="images/bottle.jpg" alt="<?= $price->value ?> руб/шт." height="200" title="<?= $price->value ?> руб/шт.">
                 </td>
                 <td class="pl-4">
                    <div>
@@ -146,7 +149,7 @@
             <tr class="addInfo">
                 <td colspan="2">
                         <div class="price mt-2 text-center text-success" style="font-size: 1.2rem;">
-                            <b>Итого: <i class="fas fa-ruble-sign"></i> <span id="price">100</span></b>
+                            <b>Итого: <i class="fas fa-ruble-sign"></i> <span id="price"><?= $price->value ?></span></b>
                         </div>
                         <label for="phone" class="mt-2">Введите ваш телефон*</label>
                         <input id="phone" name="phone" class="form-control" type="tel" placeholder="79246628934" value="<? if (Cookie::exists('phone')){echo Cookie::get('phone');} ?>" required pattern="7[0-9]{10}">
@@ -174,7 +177,7 @@
         </div>
     </main>
     <script>
-        var priceOne = 100;
+        var priceOne = <?= $price->value ?>;
         var countBottle = document.getElementById("countBottle");
         var price = document.getElementById("price");
         
