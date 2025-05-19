@@ -12,11 +12,11 @@ cd to/kullaty/folder
 scp index.php gymoktem@gymoktem.myjino.ru:/home/users/g/gymoktem/domains/oktemsec.ru/water/
 ```
 
-TODO:
+### TODO:
 
-- android app for dispatcher and driver
-- android app with notification and connection to Database
-- android app has the orders page with auto update
-- web client app with auto update status
+- [ ] android app for dispatcher and driver
+- [ ] android app with notification and connection to Database
+- [ ] android app has the orders page with auto update
+- [ ] web client app with auto update status
 
-deadline: August 1, 2025
+> deadline: August 1, 2025
