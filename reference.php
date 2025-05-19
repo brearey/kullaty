@@ -76,12 +76,12 @@
                 <td class="px-2">
                     <div class="text-center">
                         <p>
-                            <a style="font-size: 1.2rem;" class="text-success" href="https://wa.me/79143038842">Написать диспетчеру <i class="fab fa-whatsapp"></i></a>
+                            <a style="font-size: 1.2rem;" class="text-success" href="https://wa.me/79246628934">Написать диспетчеру <i class="fab fa-whatsapp"></i></a>
                         </p>
                     </div>
                     <div class="mt-4 text-center">
                         <p>
-                            <a style="font-size: 1.2rem;" class="text-primary" href="tel: +79143038842">Позвонить диспетчеру <i class="fas fa-phone"></i></a>
+                            <a style="font-size: 1.2rem;" class="text-primary" href="tel: +79246628934">Позвонить диспетчеру <i class="fas fa-phone"></i></a>
                         </p>
                     </div>
                 </td>
@@ -90,14 +90,14 @@
                 <td class="px-2">
                     <hr>
                     <h5>Мобильный банк</h5>
-                    <p>Отправляете через Мобильный банк Сбербанк на телефонный номер: <strong id="phone">89142753653 </strong><button class="btn btn-outline-secondary btn-sm" onclick="copyPhone()">Копировать номер</button></p>
+                    <p>Отправляете через Мобильный банк Сбербанк на телефонный номер: <strong id="phone">89246628934 </strong><button class="btn btn-outline-secondary btn-sm" onclick="copyPhone()">Копировать номер</button></p>
                 </td>
             </tr>
             <tr class="text-justify">
                 <td class="px-2">
                     <hr>
                     <p>
-                        Мы всегда будем рады видеть Вас по адресу: <strong>📍г. Покровск, ул.Комсомольская 14/1, здание «АвтоДом».</strong>
+                        Мы всегда будем рады видеть Вас по адресу: <strong>📍c. Чапаево, ул.Школьная 13</strong>
                         <br>
                         <br>
                         Прайс услуг в обычные дни:
@@ -128,7 +128,7 @@
             function copyPhone() {
                 var $temp = $("<input>");
                 $("body").append($temp);
-                $temp.val("89142753653").select();
+                $temp.val("89246628934").select();
                 document.execCommand("copy");
                 //alert("Телефонный номер скопирован в буфер обмена.");
                 $("#copiedMessage").show();

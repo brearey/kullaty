@@ -6,6 +6,23 @@
     if (!isset($_SESSION['logged_user'])) {
         header('Location: login.php');
     }
+
+    if (isset($_POST['ad_add'])) {
+        $ad = R::dispense('ads');
+        // $ad  = R::findOne( 'ads', ' id = ? ', [ 1 ] );
+        $ad->number = 1;
+        $ad->text = $_POST['ad_text'];
+        $ad->date = time();
+
+        R::store($ad);
+    }
+
+    if (isset($_POST['ad_delete']) ) {
+        $ad  = R::findOne( 'ads', ' number = ? ', [ 1 ] );
+        if (isset($ad)) {
+            R::trash($ad);
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +32,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
     <meta name="description" content="">
     <meta name="author" content="brearey">
-    <title>Админка</title>
+    <title>Объявление</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/starter-template/">
 
@@ -95,55 +112,31 @@
         <? unset($_SESSION['messages']); ?>
         <? endif;?>
         <!-- CONTENT -->
-        <h5 class="text-center">Активные заказы:</h5>
-        <!-- ORDERS LIST -->
+        <h5 class="text-center">Объявление:</h5>
+        <!-- AD VIEW -->
         <?php
-        $orders = R::findAll('orders', ' ORDER BY date DESC ' );
+        $ad  = R::findOne( 'ads', ' number = ? ', [ 1 ] );
         ?>
-        <? foreach ($orders as $order): ?>
-                <?php
-                    $user  = R::findOne( 'users', ' hash_phone = ? ', [ $order->hash_phone ] );
-                ?>
-
-                <div class="card mb-2 bg-light <? if ($order->status == 'В ожидании') {echo 'border-warning';} else { echo 'border-primary';} ?>">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-9">
-                                <h5 class="card-title"><?= $user->address; ?></h5>
-                                <h5 class="card-subtitle"><a href="tel:+<?=$user->phone;?>"><?= $user->phone; ?></a></h5>
-                            </div>
-                            <div class="col-3 text-center">
-                                <h6 class="card-text text-muted"><span style="font-size: 1.4rem;"><?= $order->count_bottle; ?></span><span> шт.</span></h6>
-                            </div>
-                        </div>
-                        <div class="collapse" id="collapseExample<?=$order->id;?>">
-                            <p class="card-text">Номер заказа: <strong><?= $order->id; ?></strong></p>
-                            <p class="card-text">Сумма оплаты: <strong><?= $order->count_bottle * 100; ?> рублей</strong></p>
-                            <p class="card-text">Способ оплаты: <?= $order->payment_method; ?></p>
-                            <p class="card-text">Пожелание заказчика: <i class="text-muted"><?
-                                if ($order->note == "") {echo 'нет';} else { echo $order->note;}
-                            ?></i></p>
-                            <form action="changeStatus.php" method="post">
-                                <input type="hidden" name="hash_phone" value="<?=$order->hash_phone;?>">
-                                <select class="custom-select" name="change_status" onchange="this.form.submit()">
-                                    <option value="В ожидании" <? if ($order->status == 'В ожидании') echo "selected";?>>В ожидании</option>
-                                    <option value="Принят" <? if ($order->status == 'Принят') echo "selected";?>>Принят</option>
-                                    <option value="В пути" <? if ($order->status == 'В пути') echo "selected";?>>В пути</option>
-                                    <option value="Доставлено" <? if ($order->status == 'Доставлено') echo "selected";?>>Доставлено</option>
-                                </select>
-                            </form>
-                            <p class="card-text text-center mb-2"><small class="text-muted"><?= date("d-m-Y H:i:s", $order->date); ?></small></p>
-                            <form action="changeStatus.php" method="post" class="text-right">
-                                <input type="hidden" name="hash_phone" value="<?=$order->hash_phone;?>">
-                                <button type="submit" name="change_status" value="Оплачено" class="btn btn-sm btn-outline-success" onclick="return confirm('Вы уверены? Данный заказ перейдет в раздел оплаченные')">Оплачено?</button>
-                            </form>
-                        </div>
-                        <div class="text-center mt-1">
-                            <a class="card-link" data-toggle="collapse" href="#collapseExample<?=$order->id;?>" role="button" aria-expanded="false" aria-controls="collapseExample<?=$order->id;?>">Подробнее</a>
-                        </div>
-                    </div>
-                </div>
-        <? endforeach; ?>
+        <? if ($ad == NULL): ?>
+            <form method="post">
+                <table class="ml-auto mr-auto">
+                <tr>
+                    <td><textarea class="form-control mb-2" name="ad_text" id="" cols="30" rows="10" placeholder="Введите текст объявления" required></textarea></td>
+                </tr>
+                <tr>
+                    <td><input class="btn btn-primary form-control" name="ad_add" type="submit" value="Добавить"></td>
+                </tr>
+                </table>
+            </form>
+        <? else: ?>
+            <div class="mx-auto p-5">
+                <p><?= $ad->text; ?></p>
+                <p class="my-2"><small class="text-muted"><?= date("d-m-Y H:i:s", $ad->date); ?></small></p>
+                <form action="" method="post">
+                    <input class="btn btn-danger mt-2" type="submit" name="ad_delete" value="Удалить">
+                </form>
+            </div>
+        <? endif; ?>
     </main>
     <script>
       

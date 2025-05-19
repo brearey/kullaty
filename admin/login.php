@@ -2,7 +2,12 @@
   require_once '../db_connect.php';
   require_once '../classes/Cookie.php';
   $expiry = 86400 * 30;
-
+  /*
+  $admin = R::dispense('admins');
+    $admin->login = 'aes';
+    $admin->password = md5('admin1');
+    R::store($admin);
+*/
   if (isset($_SESSION['logged_user'])) {
     header('Location: index.php');
   }
@@ -18,10 +23,6 @@
       }
 
     }
-    /*$admin = R::dispense('admins');
-    $admin->login = $_POST['login'];
-    $admin->password = md5($_POST['password']);
-    R::store($admin);*/
   }
 ?>
 <!DOCTYPE html>
@@ -49,11 +50,11 @@
       <img class="mb-4" src="../images/180x180.png" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Вход в панель управления:</h1>
       <label for="inputLogin" class="sr-only">Логин</label>
-      <input type="login" id="inputLogin" class="form-control mb-2" placeholder="логин" required autofocus name="login" value="<? if (Cookie::exists('login')){echo Cookie::get('login');} ?>">
+      <input type="login" id="inputLogin" class="form-control" placeholder="логин" required autofocus name="login" value="<? if (Cookie::exists('login')){echo Cookie::get('login');} ?>">
       <label for="inputPassword" class="sr-only">Пароль</label>
       <input type="password" id="inputPassword" class="form-control" placeholder="пароль" required name="password" >
       <button class="btn btn-lg btn-primary btn-block" type="submit" name="do_login">Войти</button>
-      <p class="mt-5 mb-3 text-muted">&copy; Куллаты 2020</p>
+      <p class="mt-5 mb-3 text-muted">&copy; Школьный технопарк<br>МБНОУ "Октемский НОЦ им.М.Е.Николаева" 2024-2025</p>
     </form>
   </body>
 </html>

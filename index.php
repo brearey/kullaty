@@ -75,6 +75,14 @@
     <? require_once 'menu.php'; ?>
     <!-- CONTENT -->
     <main role="main" class="p-4">
+        <!-- Вывод объявлений -->
+        <? $ad  = R::findOne( 'ads', ' number = ? ', [ 1 ] ); ?>
+        <? if (isset($ad)): ?>
+            <div class="alert alert-warning" role="alert">
+                <p><?= $ad->text; ?></p>
+            </div>
+        <? endif;?>
+
         <?
         if (Cookie::exists('hashPhone')) {
             $hashPhone = Cookie::get('hashPhone');

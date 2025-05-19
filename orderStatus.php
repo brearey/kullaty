@@ -100,7 +100,7 @@ date_default_timezone_set('Asia/Yakutsk');
                     if (isset($order) && $order->status != 'Оплачено'): ?>
                         <div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Номер вашего заказа: <?= $order->id; ?></li>
+                                <!-- <li class="list-group-item">Номер вашего заказа: <?= $order->id; ?></li> -->
                                 <li class="list-group-item">Количество бутылей: <?= $order->count_bottle; ?></li>
                                 <li class="list-group-item">Способ оплаты: <?= $order->payment_method; ?></li>
                                 <li class="list-group-item">Сумма оплаты: <?= $order->count_bottle * 100; ?> рублей</li>
@@ -117,6 +117,12 @@ date_default_timezone_set('Asia/Yakutsk');
                                     <button class="btn btn-outline-danger mt-4" name="orderDelete" type="submit" onclick="return confirm('Вы точно хотите удалить заказ?')" <?= $disabled; ?>>Отменить заказ</button>
                                 </form>
                             </div>
+                            <? if ($order->payment_method == "Мобильный банк"): ?>
+                            <div class="my-5">
+                                <h5>Мобильный банк</h5>
+                                <p>Отправляете через Мобильный банк Сбербанк на телефонный номер: <strong id="phone">89246628934 </strong><button class="btn btn-outline-secondary btn-sm" onclick="copyPhone()">Копировать номер</button></p>
+                            </div>
+                            <? endif; ?>
                         </div>
                     <? else: ?>
                         <div class="px-2 text-center">
@@ -132,5 +138,16 @@ date_default_timezone_set('Asia/Yakutsk');
                         </div>';
                 } ?>
     </main><!-- /.container -->
+    <script>
+        function copyPhone() {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val("89246628934").select();
+            document.execCommand("copy");
+            //alert("Телефонный номер скопирован в буфер обмена.");
+            $("#copiedMessage").show();
+            $temp.remove();
+        }
+    </script>
 </body>
 </html>
