@@ -1,5 +1,15 @@
 # Clear water delivery web app on PHP, MySQL
 
+### Quickstart
+
+- copy `example_db_connect.php` to `db_connect.php` and write login password MySQL
+- run in server like [OpenServer](https://ospanel.io/)
+
+### Demo
+
+- Client [https://oktemsec.ru/water](https://oktemsec.ru/water)
+- Admin panel [https://oktemsec.ru/water/admin](https://oktemsec.ru/water/admin)
+
 ### Deploy all files to prod
 ```bash
 cd to/kullaty/folder
