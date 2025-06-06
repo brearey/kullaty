@@ -18,6 +18,9 @@
                     <a class="nav-link" href="ads.php">Объявление</a>
                 </li>
                 <li class="nav-item active">
+                    <a class="nav-link" href="add_order.php">Добавить заказ</a>
+                </li>
+                <li class="nav-item active">
                     <a class="nav-link" href="logout.php">Выйти</a>
                 </li>
             </ul>

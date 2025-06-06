@@ -6,6 +6,8 @@
     if (!isset($_SESSION['logged_user'])) {
         header('Location: login.php');
     }
+    // Get price
+    $price  = R::findOne( 'system_info', ' name = ? ', [ 'price' ] );
 ?>
 
 <!DOCTYPE html>
@@ -118,7 +120,7 @@
                         </div>
                         <div class="collapse" id="collapseExample<?=$order->id;?>">
                             <p class="card-text">Номер заказа: <strong><?= $order->id; ?></strong></p>
-                            <p class="card-text">Сумма оплаты: <strong><?= $order->count_bottle * 100; ?> рублей</strong></p>
+                            <p class="card-text">Сумма оплаты: <strong><?= $order->count_bottle * $price->value; ?> рублей</strong></p>
                             <p class="card-text">Способ оплаты: <?= $order->payment_method; ?></p>
                             <p class="card-text">Пожелание заказчика: <i class="text-muted"><?
                                 if ($order->note == "") {echo 'нет';} else { echo $order->note;}
